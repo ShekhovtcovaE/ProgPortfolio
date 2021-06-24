@@ -21,7 +21,6 @@ def get_currencies(currencies_ids_lst=None):
     root = ET.parse(res).getroot()
     list_of_val = root.findall('Valute')
     for i in list_of_val:
-        #if str(valute_id) in currencies_ids_lst:
         val = i.find('Value').text
         name = i.find('Name').text
         result[i.find('NumCode').text] = (name, val)
