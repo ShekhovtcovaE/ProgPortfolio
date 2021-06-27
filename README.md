@@ -13,3 +13,4 @@
 ## Семестр 5
 
 ## Семестр 6
+[Тема 2](https://github.com/ShekhovtcovaE/ProgPortfolio/tree/main/sem6/t2)
