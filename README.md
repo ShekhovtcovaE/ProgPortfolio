@@ -1,4 +1,4 @@
-# ProgPortfolio
+# Портфолио по дисциплине "Программирование"
 
 ## Семестр 3
 [Тема 1](https://github.com/python-basic/sem3-t1-ShekhovtcovaE)
