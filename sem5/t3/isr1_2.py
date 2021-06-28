@@ -1,5 +1,6 @@
 from xml.etree import ElementTree as ET
 from urllib.request import urlopen
+import json
 
 
 def singleton(cls):
@@ -24,6 +25,8 @@ def get_currencies(currencies_ids_lst=None):
         val = i.find('Value').text
         name = i.find('Name').text
         result[i.find('NumCode').text] = (name, val)
-    print(result)
+    return result
 
-get_currencies()
+res = get_currencies()
+with open('data.json', 'w') as outfile:
+    json.dump(res, outfile)
