@@ -33,4 +33,6 @@
 
 [Тема 3](https://github.com/ShekhovtcovaE/ProgPortfolio/tree/main/sem6/t3)
 
+[Тема 4](https://github.com/ShekhovtcovaE/ProgPortfolio/tree/main/sem6/t4)
+
 
