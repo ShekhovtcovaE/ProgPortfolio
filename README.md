@@ -18,7 +18,13 @@
 
 [Тема 4](https://github.com/python-basic/sem4-t4-ShekhovtcovaE)
 ## Семестр 5
+[Тема 1](https://github.com/ShekhovtcovaE/ProgPortfolio/tree/main/sem5/t1)
 
+[Тема 2](https://github.com/ShekhovtcovaE/ProgPortfolio/tree/main/sem5/t2)
+
+[Тема 3](https://github.com/ShekhovtcovaE/ProgPortfolio/tree/main/sem5/t3)
+
+[Тема 4](https://github.com/ShekhovtcovaE/ProgPortfolio/tree/main/sem5/t4)
 
 ## Семестр 6
 [Тема 1](https://github.com/ShekhovtcovaE/ProgPortfolio/tree/main/sem6/t1)
