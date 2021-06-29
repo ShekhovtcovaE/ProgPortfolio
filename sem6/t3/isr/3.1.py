@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter import ttk
 import math
 
 def solveEq(a, b, c):  
