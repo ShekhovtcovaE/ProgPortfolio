@@ -1,0 +1,105 @@
+<html>
+    <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    </head>
+    <body>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
+		<div class="form-group">
+			<textarea class="form-control" id="chat" aria-label="With textarea" readonly>
+			{% for message in messages %}
+			  {{ message['message'] }}
+			{% end %}
+			</textarea>
+		  </div>
+		<form id='msgform' >
+		  <div class="form-group">
+			<input type="text" class="form-control" id="name" placeholder="Имя">
+		  </div>
+		  <div class="form-group">
+			<textarea class="form-control" id="text" aria-label="With textarea"></textarea>
+		  </div>
+		  <div class="form-group">
+			<button type="submit" class="btn btn-primary">Отправить</button>
+		  </div>
+		</form>
+	<script>
+		const updater = {
+		    errorSleepTime = 500,
+		    cursor: null,
+			poll: ()=> {
+			    const args = {};
+				if(updater.cursor)
+				    args.cursor = updater.cursor;
+				$.ajax({url: "/message/update", type: "POST", dataType: "text",
+                    data: $.param(args), success: updater.onSuccess,
+                    error: updater.onError});
+			},
+			
+			onSuccess: (res)=> {
+				try {
+					updater.newMessages(eval("(" + res + ")");
+				} catch(e) {
+				    updater.onError();
+					return;
+				}
+				updater.errorSleepTime = 500;
+				window.setTimeout(updater.poll, 0);
+			},
+			
+			onError: (res)=> {
+			    updater.errorSleepTime *= 2;
+				console.log("Poll error; sleeping for", updater.errorSleepTime, "ms");
+				window.setTimeout(updater.poll, updater.errorSleepTime);
+			},
+			newMessages: (res)=> {
+				
+				if (!response.messages)
+				 return;
+				const messages = response.messages;
+				updater.cursor = messages[messages.length - 1].id;
+				console.log(messages.length, "new messages, cursor:", updater.cursor);
+				for (let i = 0; i < messages.length; i++) {
+					updater.showMessage(messages[i]);
+				}
+			},
+
+			showMessage: function(message) {
+			
+				console.log("appendMessage: " + message.message);
+				document.getElementById('chat').append(message.message+"\n");
+				
+			}
+		};
+		
+	    document.addEventListener("DOMContentLoaded", () => {
+		  console.log('ready');
+	      const ws = new WebSocket('ws://localhost:8888/echo');
+		  ws.onopen = event => {
+			console.log('onopen');
+			ws.send("Hello Web Socket!");
+		  };
+
+		  ws.onmessage = event => {
+		    document.getElementById('chat').append(event.data+"\n");
+		    console.log('onmessage, ' + event.data);
+		  };
+
+		  ws.onclose = event => {
+			console.log('onclose');
+		  };
+		  form = document.getElementById('msgform');
+		  form.addEventListener('submit', (e) => {
+			const nickname = document.getElementById('name').value;
+			const message = document.getElementById('text').value;
+			const data = nickname + ': ' + message;
+			console.log('send message');
+			ws.send(data);
+			event.preventDefault();
+		    });
+			
+		   updater.poll();
+		});	
+        </script>	
+    </body>
+</html>
