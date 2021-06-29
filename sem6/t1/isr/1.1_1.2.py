@@ -1,6 +1,5 @@
 import numpy as np
 from math import sqrt
-import matplotlib.pyplot as plt
 import pandas
 
 data = pandas.read_csv("houses.csv")
